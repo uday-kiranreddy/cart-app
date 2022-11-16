@@ -26,7 +26,12 @@ export const reducer = (state, action) => {
         cartNumber:`x ${state.count}` ,
       };
       case "DELETE":
-        return {...state,itemName:"",cartNumber:""}
+        return {...state,itemName:"",cartNumber:""};
+      case "ADD_TO_CART_TROUSERS":
+        return {
+          ...state,
+          itemName:action.payload
+        }  
     default:
       return state;
   }

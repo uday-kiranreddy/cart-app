@@ -15,6 +15,7 @@ const initialState = {
 
 function Context({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  
   return (
     <AppState.Provider value={{ state, dispatch }}>
       {children}

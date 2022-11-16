@@ -10,6 +10,7 @@ import "./Nav.css";
 import { Button } from "@mui/material";
 import { useGlobalContext } from "./Context";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Link } from "react-router-dom";
 
 function NavbarComponent() {
   const { state, dispatch } = useGlobalContext();
@@ -24,11 +25,19 @@ function NavbarComponent() {
   return (
     <>
       <header className="flex justify-between h-15 my-3 w-[80%] mx-auto">
-        <h3 className="cursor-pointer font-bold md:ml-36 ">Sneakers</h3>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h3 className="cursor-pointer font-bold md:ml-36 ">Sneakers</h3>
+        </Link>
         <nav ref={navRef}>
-          <a href="#">Collections</a>
-          <a href="#">Men</a>
-          <a href="#">Women</a>
+          <Link to="/collection">
+            <a href="">Collections</a>
+          </Link>
+          <Link to="/Men">
+            <a href="#">Men</a>
+          </Link>
+          <Link to="/Women">
+            <a href="#">Women</a>
+          </Link>
           <a href="#">About</a>
           <a href="#">Contact</a>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>
@@ -76,13 +85,17 @@ function NavbarComponent() {
                   </h1>
                 </div>
               )}
-             {state.cartNumber==0?"": <Button
-                variant="contained"
-                style={{ backgroundColor: "orangered" }}
-                className="w-full"
-              >
-                Checkout
-              </Button>}
+              {state.cartNumber == 0 ? (
+                ""
+              ) : (
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "orangered" }}
+                  className="w-full"
+                >
+                  Checkout
+                </Button>
+              )}
             </Dropdown.Item>
           </DropdownButton>
           <Avatar src={image} style={{ marginTop: "-8px" }} />
