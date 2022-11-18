@@ -22,7 +22,7 @@ function CheckOut() {
           return (
             <>             
               <div className="checkout_item grid grid-cols-1 text-left md:text-center align-middle md:grid-cols-4 my-4">
-                <div className="flex justify-between w-[100%] align-middle text-center md:text-center">
+                <div className="flex flex-col  md:flex-row justify-between w-[100%] align-middle text-center md:text-center">
                   <Avatar src={image} />
                   <span className="text-black font-bold">{name}</span>
                 </div>
@@ -33,7 +33,6 @@ function CheckOut() {
                 <h4>${price}</h4>
                 <h4>
                   ${price * count}.00
-                 
                 </h4>
               </div>
             </>
