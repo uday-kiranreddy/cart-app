@@ -1,12 +1,15 @@
-import React, { useState } from "react";
-import { data } from "./Products";
+import React, { useState, useEffect } from "react";
+import { WomensData } from "../Datas/WomensData";
 import { Link } from "react-router-dom";
-function Collection() {
-  const [products, setProducts] = useState(data);
+function Women() {
+  //useState
+  const [posts, setPosts] = useState(WomensData);
+
+
   return (
     <>
-      <div className="w-[70%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center gap-2 space-x-2 space-y-2">
-        {products.map((product) => {
+       <div className="w-[70%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center gap-2 space-x-2 space-y-2">
+        {posts.map((product) => {
           const {
             product_id,
             product_name,
@@ -49,4 +52,4 @@ function Collection() {
   );
 }
 
-export default Collection;
+export default Women;

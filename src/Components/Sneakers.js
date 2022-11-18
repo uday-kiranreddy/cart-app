@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Button } from "@mui/material";
 // hero images
-import heroImage1 from "./images/image-product-1.jpg";
-import heroImage2 from "./images/image-product-2.jpg";
-import heroImage3 from "./images/image-product-3.jpg";
-import heroImage4 from "./images/image-product-4.jpg";
-import { useGlobalContext } from "./Context";
-function Hero() {
+import heroImage1 from "../images/image-product-1.jpg";
+import heroImage2 from "../images/image-product-2.jpg";
+import heroImage3 from "../images/image-product-3.jpg";
+import heroImage4 from "../images/image-product-4.jpg";
+import { useGlobalContext } from "../AppContext/Context";
+import {Link} from "react-router-dom";
+
+function Sneakers() {
   const { state, dispatch } = useGlobalContext();
   const [mainImage, setMainImage] = useState(heroImage1);
 
@@ -88,7 +90,7 @@ function Hero() {
         <div className="flex justify-left">
           <button
             className="md:px-3 md:m-1 btn"
-            onClick={() => dispatch("DECREEMENT")}
+            onClick={() => dispatch({type:"DECREEMENT"})}
           >
             <span className="text-orange-700">-</span>
           </button>
@@ -97,24 +99,24 @@ function Hero() {
           </span>
           <button
             className="md:px-3 md:m-1  btn"
-            onClick={() => dispatch("INCREEMENT")}
+            onClick={() => dispatch({type:"INCREEMENT"})}
           >
             <span className="text-orange-700">+</span>
           </button>
+          <Link to='/checkOut' style={{textDecoration:"none"}}>
           <Button
-           
-            onClick={() => dispatch("ADD_TO_CART")}
+            onClick={() => dispatch({type:"ADD_TO_CART"})}
             variant="contained"
             style={{ backgroundColor: "orangered" }}
             className="btn none"
           >
             <ShoppingCartOutlinedIcon />
             Add to cart
-          </Button>
+          </Button></Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default Hero;
+export default Sneakers;

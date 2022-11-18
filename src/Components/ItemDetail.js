@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { data } from "./Products";
-import { useGlobalContext } from "./Context";
+import { data } from "../Datas/Products";
+import { useGlobalContext } from "../AppContext/Context";
 import { Button } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-
-
+import { Link } from "react-router-dom";
 function ItemDetail() {
   const { state, dispatch } = useGlobalContext();
   const { id } = useParams();
@@ -35,7 +34,7 @@ function ItemDetail() {
     });
   }, []);
 
-  const discountedAmount = state.discount - state.price;
+  const discountedAmount = defaultState.price - state.productDiscount;
 
   return (
     <div className="flex flex-col md:flex-row justify-between md:justify-center align-middle text-left my-3 space-x-6 w-[80%] mx-auto">
@@ -48,7 +47,11 @@ function ItemDetail() {
         <span>
           sizes available:
           {defaultState.size.map((item) => {
-            return <button className="btn">{item[0]},{item[1]}</button>;
+            return (
+              <button className="btn">
+                {item[0]},{item[1]}
+              </button>
+            );
           })}
         </span>
       </div>
@@ -63,8 +66,8 @@ function ItemDetail() {
           {defaultState.paragraph}
         </p>
         <h4 className="text-black-800  font-semibold ">
-          ${state.price}.00
-          {state.price <= 0 ? (
+          ${defaultState.price}.00
+          {/* {defaultState.price <= 0 ? (
             <span className="text-orange-700  text-sm bg-orange-200 rounded-md p-1 m-1">
               0%
             </span>
@@ -72,39 +75,52 @@ function ItemDetail() {
             <span className="text-orange-700  text-sm bg-orange-200 rounded-md p-1 m-1">
               50%
             </span>
-          )}
+          )} */}
         </h4>
-        {state.count <= 0 ? (
+        {/* {state.productCount <= 0 ? (
           ""
         ) : (
-          <h1 className=" w-70 md:w-80 py-1 text-base bg-green-500 rounded-md text-white md:px-2">{`🎉 you save ${discountedAmount} (50%) on this order 🥳`}</h1>
-        )}
-        <s className=" text-gray-600 py-1">${state.discount}</s>
+          <h1 className=" w-70 md:w-80 py-1 text-base bg-green-500 rounded-md text-white md:px-2">{`🎉 you save ${discountedAmount} on this order 🥳`}</h1>
+        )} */}
+        <s className=" text-gray-600 py-1">${state.productDiscount}.00</s>
         <div className="flex justify-left">
           <button
             className="md:px-3 md:m-1 btn"
-            onClick={() => dispatch("DECREEMENT")}
+            onClick={() => dispatch({ type: "PRODUCT_DECREEMENT" })}
           >
             <span className="text-orange-700">-</span>
           </button>
           <span className="text-black-800  font-semibold mt-8 md:mt-2.5 ">
-            {state.count}
+            {state.productCount}
           </span>
           <button
             className="md:px-3 md:m-1  btn"
-            onClick={() => dispatch("INCREEMENT")}
+            onClick={() => dispatch({ type: "PRODUCT_INCREEMENT" })}
           >
             <span className="text-orange-700">+</span>
           </button>
-          <Button
-            onClick={() => dispatch("ADD_TO_CART")}
-            variant="contained"
-            style={{ backgroundColor: "orangered" }}
-            className="btn none"
-          >
-            <ShoppingCartOutlinedIcon />
-            Add to cart
-          </Button>
+          <Link to="/CheckOut" style={{textDecoration:"none"}}>
+            <Button
+              onClick={() =>
+                dispatch({
+                  type: "ADD_TO_CART_PRODUCT",
+                  payload: {
+                    image:`${defaultState.img}`,
+                    name: `${defaultState.name}`,
+                    price: `${defaultState.price}`,
+                    count:`${state.productCount}`,
+                    brand:`${defaultState.brand}`
+                  },
+                })
+              }
+              variant="contained"
+              style={{ backgroundColor: "orangered" }}
+              className="btn none"
+            >
+              <ShoppingCartOutlinedIcon />
+              Add to cart
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

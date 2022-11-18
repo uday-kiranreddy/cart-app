@@ -1,16 +1,23 @@
 import React, { useContext } from "react";
 import { createContext, useReducer } from "react";
 import {reducer} from './Reducer'
+import cartImage from "../images/image-product-1-thumbnail.jpg";
+
 
 export const AppState = createContext();
 
 const initialState = {
+  img:cartImage,
   count: 0,
   price:0,
   discount:0,
-  itemName: "",
-  cartNumber:"",
-  positive:false
+  itemName: [],
+  cartNumber:0,
+  positive:false,
+  productCount:0,
+  productDiscount:999,
+  checkOutItems:[  ],
+  totalAmount:0
 };
 
 function Context({ children }) {
