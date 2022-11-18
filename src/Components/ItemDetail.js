@@ -90,7 +90,7 @@ function ItemDetail() {
           >
             <span className="text-orange-700">-</span>
           </button>
-          <span className="text-black-800  font-semibold mt-8 md:mt-2.5 ">
+          <span className="text-black-800  font-semibold mt-2 md:mt-2.5 ">
             {state.productCount}
           </span>
           <button
